@@ -29,7 +29,6 @@ DRACUT_ARGS=(
     --force
     --no-hostonly
     --no-compress
-    --omit i18n
     --omit lvm
     --omit multipath
     --omit network
