@@ -7,7 +7,7 @@ check() {
 }
 
 depends() {
-    echo 0
+    echo systemd
 }
 
 install() {
