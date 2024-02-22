@@ -7,9 +7,9 @@ check() {
 }
 
 depends() {
-    echo systemd
+    return 0
 }
 
 install() {
-    inst_multiple loadkeys
+    inst_multiple loadkeys || return 1
 }
