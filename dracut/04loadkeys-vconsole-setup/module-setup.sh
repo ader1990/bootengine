@@ -163,6 +163,7 @@ install() {
             UNICODE=1
         fi
         shopt -q -u nocasematch
+        KEYMAP="us"
 
         # Gentoo user may have KEYMAP set to something like "-u pl2",
         KEYMAP=${KEYMAP#-* }
@@ -267,6 +268,6 @@ install() {
             inst_simple ${VCONFIG_CONF}
         fi
 
-        install_local_i18n || install_all_kbd
+        install_local_i18n
     fi
 }
