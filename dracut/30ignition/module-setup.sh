@@ -188,5 +188,5 @@ EOF
 # See: https://github.com/coreos/ignition/commit/d304850c3d3696822bc05e0833ee4b27df9d7a38
 installkernel() {
      # required by hyperv platform to read kvp from the kernel
-     instmods -c hv_utils
+     instmods -c hv_utils || true
 }
