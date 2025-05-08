@@ -11,7 +11,7 @@ Wants=dev-disk-by\x2dpartlabel-ROOT.device
 Type=oneshot
 RemainAfterExit=yes
 Environment=SYSTEMD_CRYPTTAB=/dev/stdin
-StandardInputText=rootencrypted /dev/disk/by-partlabel/ROOT /boot/flatcar/luks2/keyfile luks,tpm2-device=auto
+StandardInputText=rootencrypted /dev/disk/by-partlabel/ROOT /sysroot/boot/flatcar/luks2/keyfile luks,tpm2-device=auto
 ExecStart=/usr/lib/systemd/system-generators/systemd-cryptsetup-generator /etc/systemd/system
 ExecStartPost=/bin/systemctl daemon-reload
 ExecStartPost=/bin/systemctl start systemd-cryptsetup@rootencrypted.service
