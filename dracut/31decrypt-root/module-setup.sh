@@ -5,4 +5,5 @@ install() {
         "$systemdsystemunitdir/decrypt-root.service"
 
     inst_simple /usr/lib64/cryptsetup/libcryptsetup-token-systemd-tpm2.so
+    inst_simple "$moddir/keyfile" "/etc/luks2/keyfile"
 }
