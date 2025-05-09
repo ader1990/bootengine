@@ -17,4 +17,4 @@ StandardInputText=rootencrypted /dev/disk/by-partlabel/ROOT /sysroot/boot/flatca
 ExecStart=/usr/lib/systemd/system-generators/systemd-cryptsetup-generator /etc/systemd/system
 ExecStartPost=/bin/systemctl daemon-reload
 ExecStartPost=/bin/systemctl start systemd-cryptsetup@rootencrypted.service
-ExecPre=/usr/bin/mount /dev/disk/by-label/EFI-SYSTEM /sysroot/boot
+ExecStartPre=/usr/bin/mount /dev/disk/by-label/EFI-SYSTEM /sysroot/boot
