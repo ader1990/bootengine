@@ -4,5 +4,8 @@ install() {
     inst_simple "$moddir/decrypt-root.service" \
         "$systemdsystemunitdir/decrypt-root.service"
 
+    inst_simple "$moddir/generate-luks2-input.sh" \
+        "/usr/bin/generate-luks2-input"
+
     inst_simple /usr/lib64/cryptsetup/libcryptsetup-token-systemd-tpm2.so
 }
