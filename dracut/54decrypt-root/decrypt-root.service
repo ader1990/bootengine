@@ -10,8 +10,4 @@ Wants=dev-disk-by\x2dpartlabel-ROOT.device
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-Environment=SYSTEMD_CRYPTTAB=/dev/stdin
-StandardInputText=rootencrypted /dev/disk/by-partlabel/ROOT none luks,tpm2-device=auto
-ExecStart=/usr/lib/systemd/system-generators/systemd-cryptsetup-generator /etc/systemd/system
-ExecStartPost=/bin/systemctl daemon-reload
-ExecStartPost=/bin/systemctl start systemd-cryptsetup@rootencrypted.service
+ExecStart=/usr/sbin/decrypt-root

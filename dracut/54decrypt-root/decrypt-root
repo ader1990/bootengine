@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "rootencrypted /dev/disk/by-partlabel/ROOT none luks,tpm2-device=auto" > /tmp/crypttab
+SYSTEMD_CRYPTTAB=/tmp/crypttab /usr/lib/systemd/system-generators/systemd-cryptsetup-generator /etc/systemd/system/
+
+# Start the generated systemd service to decrypt the root partition.
+systemctl start systemd-cryptsetup@rootencrypted
