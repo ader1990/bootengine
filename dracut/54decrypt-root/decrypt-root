@@ -1,7 +1,19 @@
 #!/bin/bash
 set -euo pipefail
+set -x
+FLATCAR_LUKS2_KEYFILE_LOCATION="/boot/flatcar/luks2-keyfile-location"
+LUKS2_KEYFILE="none"
+CRYPTAB_LUKS2_EXTRA_OPTIONS=""
 
-echo "rootencrypted /dev/disk/by-partlabel/ROOT none luks,tpm2-device=auto" > /tmp/crypttab
+if [[ -f "${FLATCAR_LUKS2_KEYFILE_LOCATION}" ]]; then
+    LUKS2_KEYFILE_LOCATION_CONTENT=$(cat "${FLATCAR_LUKS2_KEYFILE_LOCATION}")
+    if [[ ! -z "${LUKS2_KEYFILE_LOCATION_CONTENT}" ]]; then
+        CRYPTAB_LUKS2_EXTRA_OPTIONS=",keyfile-timeout=30s"
+	LUKS2_KEYFILE="${LUKS2_KEYFILE_LOCATION_CONTENT}"
+    fi
+fi
+
+echo "rootencrypted /dev/disk/by-partlabel/ROOT ${LUKS2_KEYFILE} luks,tpm2-device=auto${CRYPTAB_LUKS2_EXTRA_OPTIONS}" > /tmp/crypttab
 SYSTEMD_CRYPTTAB=/tmp/crypttab /usr/lib/systemd/system-generators/systemd-cryptsetup-generator /etc/systemd/system/
 
 # Start the generated systemd service to decrypt the root partition.
